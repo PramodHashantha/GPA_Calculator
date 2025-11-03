@@ -1,0 +1,116 @@
+.gpa-stats {
+  margin-bottom: 20px;
+}
+
+.gpa-card {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  border-radius: 20px;
+  padding: 30px;
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  box-shadow: 0 10px 30px rgba(30, 58, 138, 0.3);
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.gpa-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+  background-size: 30px 30px;
+  animation: rotateBackground 20s linear infinite;
+}
+
+@keyframes rotateBackground {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.gpa-icon {
+  font-size: 3rem;
+  position: relative;
+  z-index: 1;
+}
+
+.gpa-content {
+  flex: 1;
+  position: relative;
+  z-index: 1;
+}
+
+.gpa-content h3 {
+  font-size: 0.9rem;
+  opacity: 0.9;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.gpa-value {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 5px;
+  line-height: 1;
+}
+
+.gpa-label {
+  font-size: 1rem;
+  opacity: 0.9;
+  font-weight: 500;
+}
+
+.gpa-details {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  position: relative;
+  z-index: 1;
+}
+
+.gpa-detail-item {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.detail-label {
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+
+.detail-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+@media (max-width: 768px) {
+  .gpa-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 25px 20px;
+  }
+
+  .gpa-icon {
+    font-size: 2.5rem;
+  }
+
+  .gpa-value {
+    font-size: 2.5rem;
+  }
+
+  .gpa-details {
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+  }
+}
+

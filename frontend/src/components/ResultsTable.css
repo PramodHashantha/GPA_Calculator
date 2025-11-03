@@ -1,0 +1,234 @@
+.results-container {
+  width: 100%;
+}
+
+.results-header {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: white;
+  padding: 20px 25px;
+  border-radius: 15px 15px 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.results-header h2 {
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.semester-gpa {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.gpa-label {
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+.gpa-value {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-top: none;
+  border-radius: 0 0 15px 15px;
+  background: var(--bg-primary);
+}
+
+.results-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 800px;
+}
+
+.results-table thead {
+  background: var(--bg-tertiary);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.results-table th {
+  padding: 15px;
+  text-align: left;
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid var(--border);
+}
+
+.table-row {
+  border-bottom: 1px solid var(--border);
+  transition: background-color 0.2s ease;
+}
+
+.table-row:hover {
+  background-color: var(--bg-secondary);
+}
+
+.results-table td {
+  padding: 15px;
+  color: var(--text-primary);
+  font-size: 0.95rem;
+}
+
+.subject-code-cell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.caret-icon {
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.subject-code-cell:hover .caret-icon {
+  transform: translateY(2px);
+}
+
+.subject-name {
+  font-weight: 500;
+  max-width: 300px;
+}
+
+.grade-badge {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 6px;
+  color: white;
+  font-weight: 600;
+  font-size: 0.85rem;
+  min-width: 45px;
+  text-align: center;
+}
+
+.period {
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.delete-btn {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 5px;
+  transition: all 0.2s ease;
+  opacity: 0.7;
+}
+
+.delete-btn:hover {
+  opacity: 1;
+  background: rgba(239, 68, 68, 0.1);
+  transform: scale(1.1);
+}
+
+.results-footer {
+  padding: 15px 25px;
+  background: var(--bg-secondary);
+  border-radius: 0 0 15px 15px;
+  border: 1px solid var(--border);
+  border-top: none;
+}
+
+.footer-info {
+  display: flex;
+  gap: 20px;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.footer-info strong {
+  color: var(--text-primary);
+}
+
+.loading-container {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-secondary);
+}
+
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid var(--border);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  margin: 0 auto 20px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-secondary);
+}
+
+.empty-icon {
+  font-size: 4rem;
+  margin-bottom: 20px;
+}
+
+.empty-state h3 {
+  color: var(--text-primary);
+  margin-bottom: 10px;
+  font-size: 1.5rem;
+}
+
+.empty-state p {
+  font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+  .results-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .results-header h2 {
+    font-size: 1.1rem;
+  }
+
+  .gpa-value {
+    font-size: 1.5rem;
+  }
+
+  .table-wrapper {
+    border-radius: 0;
+  }
+
+  .results-table {
+    font-size: 0.85rem;
+  }
+
+  .results-table th,
+  .results-table td {
+    padding: 10px 8px;
+  }
+
+  .footer-info {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+

@@ -1,0 +1,777 @@
+@import '../styles/variables';
+@import '../styles/mixins';
+
+// Dashboard layout styles (shared with Dashboard page)
+.dashboard {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: $bg-secondary;
+  
+  @include dark-theme {
+    background: $bg-secondary-dark;
+  }
+}
+
+.dashboard-header {
+  background: $bg-primary;
+  border-bottom: 1px solid $border;
+  padding: $spacing-md $spacing-xl;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: $shadow-sm;
+  
+  @include dark-theme {
+    background: $bg-primary-dark;
+    border-color: $border-dark;
+  }
+  
+  .header-content {
+    max-width: 1600px;
+    margin: 0 auto;
+    @include flex-between;
+    gap: $spacing-lg;
+    
+    .header-left {
+      @include flex-center;
+      gap: $spacing-lg;
+      
+      .logo-section {
+        @include flex-center;
+        gap: $spacing-sm;
+        
+        .logo-icon {
+          width: 36px;
+          height: 36px;
+          @include flex-center;
+          background: transparent;
+          color: $primary;
+          border-radius: $radius-md;
+          padding: 6px;
+          
+          svg {
+            width: 24px;
+            height: 24px;
+            stroke: currentColor;
+          }
+        }
+        
+        .logo-text {
+          font-size: 1.25rem;
+          font-weight: 600;
+          color: $text-primary;
+          letter-spacing: -0.3px;
+          
+          @include dark-theme {
+            color: $text-primary-dark;
+          }
+        }
+      }
+      
+      .title-section {
+        .main-title {
+          font-size: 1.75rem;
+          font-weight: 700;
+          color: $text-primary;
+          margin-bottom: $spacing-xs;
+          
+          @include dark-theme {
+            color: $text-primary-dark;
+          }
+        }
+        
+        .subtitle {
+          font-size: 0.875rem;
+          color: $text-secondary;
+          
+          @include dark-theme {
+            color: $text-secondary-dark;
+          }
+        }
+      }
+    }
+    
+    .header-right {
+      @include flex-center;
+      gap: $spacing-md;
+      
+      .notification-btn,
+      .theme-toggle {
+        width: 40px;
+        height: 40px;
+        @include flex-center;
+        background: $bg-secondary;
+        border: 1px solid $border;
+        border-radius: $radius-md;
+        cursor: pointer;
+        font-size: 1.25rem;
+        transition: all $transition-base;
+        
+        &:hover {
+          background: $bg-tertiary;
+          transform: scale(1.05);
+        }
+        
+        @include dark-theme {
+          background: $bg-tertiary-dark;
+          border-color: $border-dark;
+          
+          &:hover {
+            background: $bg-primary-dark;
+          }
+        }
+      }
+    }
+  }
+}
+
+.dashboard-container {
+  display: flex;
+  flex: 1;
+  max-width: 1600px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.sidebar {
+  width: 260px;
+  background: $bg-primary;
+  border-right: 1px solid $border;
+  padding: $spacing-xl $spacing-lg;
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 80px);
+  
+  @include dark-theme {
+    background: $bg-primary-dark;
+    border-color: $border-dark;
+  }
+  
+  .nav-menu {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+    
+    .nav-item {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: $spacing-md;
+      padding: $spacing-md $spacing-lg;
+      border-radius: $radius-md;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+      color: $text-secondary;
+      font-size: 0.9375rem;
+      font-weight: 500;
+      transition: all $transition-base;
+      position: relative;
+      
+      .nav-icon {
+        width: 20px;
+        height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        color: inherit;
+        
+        svg {
+          width: 100%;
+          height: 100%;
+          stroke: currentColor;
+        }
+      }
+      
+      .nav-label {
+        flex: 1;
+      }
+      
+      &:hover {
+        background: $bg-secondary;
+        color: $text-primary;
+      }
+      
+      &.active {
+        background: rgba($primary, 0.1);
+        color: $primary;
+        font-weight: 600;
+        
+        &::before {
+          content: '';
+          position: absolute;
+          left: 0;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 3px;
+          height: 60%;
+          background: $primary;
+          border-radius: 0 2px 2px 0;
+        }
+        
+        .nav-icon {
+          color: $primary;
+        }
+      }
+      
+      @include dark-theme {
+        color: $text-secondary-dark;
+        
+        &:hover {
+          background: $bg-tertiary-dark;
+          color: $text-primary-dark;
+        }
+        
+        &.active {
+          background: rgba($primary, 0.15);
+          color: $primary-light;
+          
+          &::before {
+            background: $primary;
+          }
+          
+          .nav-icon {
+            color: $primary-light;
+          }
+        }
+      }
+    }
+  }
+  
+  .user-profile {
+    margin-top: auto;
+    padding-top: $spacing-xl;
+    border-top: 1px solid $border;
+    
+    @include dark-theme {
+      border-color: $border-dark;
+    }
+    
+    .profile-content {
+      @include flex-center;
+      gap: $spacing-md;
+      
+      .profile-avatar {
+        width: 48px;
+        height: 48px;
+        border-radius: $radius-full;
+        background: $primary;
+        @include flex-center;
+        color: white;
+        font-weight: 600;
+        font-size: 1.125rem;
+      }
+      
+      .profile-info {
+        flex: 1;
+        
+        .profile-name {
+          font-weight: 600;
+          color: $text-primary;
+          margin-bottom: $spacing-xs;
+          
+          @include dark-theme {
+            color: $text-primary-dark;
+          }
+        }
+        
+        .profile-major {
+          font-size: 0.875rem;
+          color: $text-secondary;
+          
+          @include dark-theme {
+            color: $text-secondary-dark;
+          }
+        }
+      }
+    }
+  }
+}
+
+.main-content {
+  flex: 1;
+  padding: $spacing-xl;
+  overflow-y: auto;
+}
+
+.subject-form-wrapper {
+  width: 100%;
+  max-width: 900px;
+}
+
+.subject-form {
+  background: $bg-primary;
+  border-radius: $radius-xl;
+  padding: $spacing-2xl;
+  box-shadow: $shadow-lg;
+  margin-bottom: $spacing-2xl;
+  
+  @include dark-theme {
+    background: $bg-primary-dark;
+  }
+  
+  @include mobile {
+    padding: $spacing-lg;
+    border-radius: $radius-lg;
+  }
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $spacing-lg;
+  margin-bottom: $spacing-xl;
+  
+  @include mobile {
+    grid-template-columns: 1fr;
+    gap: $spacing-md;
+  }
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+  position: relative;
+  
+  label {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: $text-primary;
+    margin-bottom: $spacing-xs;
+    
+    @include dark-theme {
+      color: $text-primary-dark;
+    }
+  }
+  
+  input {
+    @include input;
+    padding: $spacing-md;
+    font-size: 1rem;
+    
+    &::placeholder {
+      color: $text-secondary;
+      
+      @include dark-theme {
+        color: $text-secondary-dark;
+      }
+    }
+  }
+  
+  select {
+    @include input;
+    padding: $spacing-md;
+    padding-right: $spacing-2xl;
+    font-size: 1rem;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    position: relative;
+    
+    @include dark-theme {
+      background: $bg-primary-dark;
+      border-color: $border-dark;
+      color: $text-primary-dark;
+    }
+    
+    // Styling for dropdown options
+    option {
+      background: $bg-primary;
+      color: $text-primary;
+      padding: $spacing-sm;
+      
+      @include dark-theme {
+        background: $bg-primary-dark;
+        color: $text-primary-dark;
+      }
+    }
+    
+    &:focus {
+      border-color: $primary;
+      
+      @include dark-theme {
+        border-color: $primary-light;
+      }
+    }
+    
+    // Fix for Firefox
+    &::-moz-focus-inner {
+      border: 0;
+      padding: 0;
+    }
+    
+    // Hide default IE/Edge arrow
+    &::-ms-expand {
+      display: none;
+    }
+  }
+  
+  // Add dropdown arrow for selects
+  &.has-select {
+    position: relative;
+    
+    &::after {
+      content: '▼';
+      position: absolute;
+    right: calc(#{$spacing-md} + 4px);
+      top: calc(28px + #{$spacing-sm} + #{$spacing-xs} + 18px); // label height + gap + half of input height
+      transform: translateY(-50%);
+      pointer-events: none;
+      font-size: 0.65rem;
+      color: $text-secondary;
+      z-index: 2;
+      line-height: 1;
+      
+      @include dark-theme {
+        color: $text-secondary-dark;
+      }
+    }
+  }
+}
+
+// Alternative: use :has selector if supported (for browsers that support it)
+.form-group:has(select) {
+  position: relative;
+  
+  &::after {
+    content: '▼';
+    position: absolute;
+    right: calc(#{$spacing-md} + 4px);
+    top: calc(28px + #{$spacing-sm} + #{$spacing-xs} + 18px);
+    transform: translateY(-50%);
+    pointer-events: none;
+    font-size: 0.65rem;
+    color: $text-secondary;
+    z-index: 2;
+    line-height: 1;
+    
+    @include dark-theme {
+      color: $text-secondary-dark;
+    }
+  }
+}
+
+// Create a wrapper div approach for better control
+.select-arrow {
+  position: relative;
+  
+  select {
+    padding-right: $spacing-2xl;
+  }
+  
+  &::after {
+    content: '▼';
+    position: absolute;
+    right: $spacing-md;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    font-size: 0.75rem;
+    color: $text-secondary;
+    margin-top: 2px;
+    
+    @include dark-theme {
+      color: $text-secondary-dark;
+    }
+  }
+}
+
+.credit-badge {
+  display: inline-block;
+  margin-top: $spacing-xs;
+  padding: $spacing-xs $spacing-sm;
+  background: rgba($primary, 0.1);
+  color: $primary;
+  border-radius: $radius-sm;
+  font-size: 0.875rem;
+  font-weight: 600;
+  
+  @include dark-theme {
+    background: rgba($primary-light, 0.2);
+    color: $primary-light;
+  }
+}
+
+.error-message {
+  padding: $spacing-md;
+  background: rgba($danger, 0.1);
+  color: $danger;
+  border-radius: $radius-md;
+  border-left: 4px solid $danger;
+  font-size: 0.9375rem;
+  margin-bottom: $spacing-lg;
+  
+  @include dark-theme {
+    background: rgba($danger, 0.2);
+  }
+}
+
+.form-actions {
+  @include flex-center;
+  justify-content: center;
+  margin-top: $spacing-xl;
+  padding-top: $spacing-lg;
+  border-top: 1px solid $border;
+  
+  @include dark-theme {
+    border-color: $border-dark;
+  }
+}
+
+.add-btn {
+  @include button-primary;
+  padding: $spacing-md $spacing-xl;
+  font-size: 1rem;
+  white-space: nowrap;
+  
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+}
+
+// Recently Added Subjects Section
+.recent-subjects-section {
+  background: $bg-primary;
+  border-radius: $radius-xl;
+  padding: $spacing-2xl;
+  box-shadow: $shadow-lg;
+  
+  @include dark-theme {
+    background: $bg-primary-dark;
+  }
+  
+  @include mobile {
+    padding: $spacing-lg;
+    border-radius: $radius-lg;
+  }
+}
+
+.recent-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: $text-primary;
+  margin-bottom: $spacing-lg;
+  
+  @include dark-theme {
+    color: $text-primary-dark;
+  }
+}
+
+.recent-subjects-list {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+}
+
+.recent-subject-item {
+  @include flex-between;
+  align-items: center;
+  padding: $spacing-md;
+  background: $bg-secondary;
+  border-radius: $radius-md;
+  border: 1px solid $border;
+  transition: all $transition-base;
+  
+  &:hover {
+    box-shadow: $shadow-md;
+    transform: translateY(-2px);
+  }
+  
+  @include dark-theme {
+    background: $bg-tertiary-dark;
+    border-color: $border-dark;
+  }
+  
+  @include mobile {
+    flex-wrap: wrap;
+    gap: $spacing-sm;
+  }
+}
+
+.subject-icon-small {
+  width: 40px;
+  height: 40px;
+  @include flex-center;
+  background: rgba($primary, 0.1);
+  color: $primary;
+  border-radius: $radius-md;
+  flex-shrink: 0;
+  
+  svg {
+    width: 20px;
+    height: 20px;
+    stroke: currentColor;
+  }
+  
+  @include dark-theme {
+    background: rgba($primary-light, 0.15);
+    color: $primary-light;
+  }
+}
+
+.subject-info {
+  flex: 1;
+  min-width: 0;
+  margin: 0 $spacing-md;
+  
+  @include mobile {
+    width: 100%;
+    margin: $spacing-xs 0;
+  }
+}
+
+.subject-name-text {
+  font-weight: 600;
+  color: $text-primary;
+  margin-bottom: $spacing-xs;
+  font-size: 0.9375rem;
+  
+  @include dark-theme {
+    color: $text-primary-dark;
+  }
+}
+
+.subject-meta-text {
+  font-size: 0.875rem;
+  color: $text-secondary;
+  
+  @include dark-theme {
+    color: $text-secondary-dark;
+  }
+}
+
+.subject-grade-badge {
+  width: 36px;
+  height: 36px;
+  @include flex-center;
+  border-radius: $radius-full;
+  font-weight: 700;
+  font-size: 0.9375rem;
+  color: white;
+  margin: 0 $spacing-sm;
+  
+  &[data-grade="green"] {
+    background: $success;
+  }
+  
+  &[data-grade="blue"] {
+    background: $primary;
+  }
+  
+  &[data-grade="yellow"] {
+    background: $warning;
+  }
+  
+  &[data-grade="red"] {
+    background: $danger;
+  }
+  
+  @include mobile {
+    margin: 0;
+  }
+}
+
+.subject-semester-text {
+  font-size: 0.875rem;
+  color: $text-secondary;
+  margin: 0 $spacing-sm;
+  
+  @include dark-theme {
+    color: $text-secondary-dark;
+  }
+  
+  @include mobile {
+    margin: 0;
+    width: 100%;
+  }
+}
+
+.delete-btn {
+  width: 32px;
+  height: 32px;
+  @include flex-center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: $spacing-xs;
+  border-radius: $radius-sm;
+  color: $text-secondary;
+  transition: all $transition-base;
+  opacity: 0.6;
+  
+  svg {
+    width: 18px;
+    height: 18px;
+    stroke: currentColor;
+  }
+  
+  &:hover {
+    opacity: 1;
+    background: rgba($danger, 0.1);
+    color: $danger;
+    transform: scale(1.1);
+  }
+  
+  @include dark-theme {
+    color: $text-secondary-dark;
+    
+    &:hover {
+      color: $danger;
+    }
+  }
+}
+
+.empty-recent {
+  text-align: center;
+  padding: $spacing-2xl;
+  color: $text-secondary;
+  font-size: 0.9375rem;
+  
+  @include dark-theme {
+    color: $text-secondary-dark;
+  }
+}
+
+// Mobile responsive
+@include mobile {
+  .dashboard-container {
+    flex-direction: column;
+  }
+  
+  .sidebar {
+    width: 100%;
+    min-height: auto;
+    border-right: none;
+    border-bottom: 1px solid $border;
+    padding: $spacing-lg;
+    
+    @include dark-theme {
+      border-color: $border-dark;
+    }
+    
+    .nav-menu {
+      display: flex;
+      flex-direction: row;
+      overflow-x: auto;
+      gap: $spacing-sm;
+      margin-bottom: $spacing-lg;
+      
+      .nav-item {
+        white-space: nowrap;
+        padding: $spacing-sm $spacing-md;
+      }
+    }
+  }
+  
+  .main-content {
+    padding: $spacing-md;
+  }
+}

@@ -1,0 +1,114 @@
+@import './variables';
+
+// Theme mixins
+@mixin dark-theme {
+  [data-theme="dark"] & {
+    @content;
+  }
+}
+
+// Flexbox mixins
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+// Card styles
+@mixin card {
+  background: $bg-primary;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-md;
+  padding: $spacing-lg;
+  border: 1px solid $border;
+  
+  @include dark-theme {
+    background: $bg-primary-dark;
+    border-color: $border-dark;
+  }
+}
+
+// Button styles
+@mixin button-primary {
+  background: linear-gradient(135deg, $primary 0%, $primary-dark 100%);
+  color: white;
+  border: none;
+  border-radius: $radius-md;
+  padding: $spacing-sm $spacing-lg;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all $transition-base;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: $shadow-lg;
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+// Input styles
+@mixin input {
+  width: 100%;
+  padding: $spacing-sm $spacing-md;
+  border: 2px solid $border;
+  border-radius: $radius-md;
+  background: $bg-secondary;
+  color: $text-primary;
+  font-size: 1rem;
+  transition: all $transition-base;
+  outline: none;
+  
+  &:focus {
+    border-color: $primary;
+    box-shadow: 0 0 0 3px rgba($primary, 0.1);
+  }
+  
+  @include dark-theme {
+    background: $bg-primary-dark;
+    border-color: $border-dark;
+    color: $text-primary-dark;
+    
+    &:focus {
+      box-shadow: 0 0 0 3px rgba($primary-light, 0.2);
+      border-color: $primary-light;
+    }
+  }
+}
+
+// Gradient backgrounds
+@mixin gradient-primary {
+  background: linear-gradient(135deg, $primary 0%, $primary-dark 100%);
+}
+
+@mixin gradient-success {
+  background: linear-gradient(135deg, $success 0%, #059669 100%);
+}
+
+// Responsive breakpoints
+@mixin mobile {
+  @media (max-width: 768px) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: 769px) and (max-width: 1024px) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: 1025px) {
+    @content;
+  }
+}
+
